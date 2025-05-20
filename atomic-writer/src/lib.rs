@@ -14,6 +14,9 @@ pub fn atomic_write(path: &Path, data: &[u8]) -> io::Result<()> {
     // Atomic replace -> by default, the file will be replaced atomically
     fs::rename(temp_path, path)?;
 
+    // Ensuring directory metadata is synced and durable
+    sync_parent_dir(path)?;
+
     Ok(())
 }
 
@@ -21,5 +24,13 @@ fn generate_temp_path(target: &Path) -> io::Result<PathBuf> {
     let dir = target.parent().ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "Target Path is invalid"))?;
 
     Ok(dir.join(format!(".tmp.{}", Uuid::new_v4())))
+}
+
+fn sync_parent_dir(path: &Path) -> io::Result<()> {
+    if let Some(parent) = path.parent() {
+        File::open(parent)?.sync_all()?;
+    }
+
+    Ok(())
 }
 
