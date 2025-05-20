@@ -1,0 +1,9 @@
+[package]
+name = "append-only-logs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bincode = "2.0.1"
+crc32fast = "1.4.2"
+serde = { version = "1.0.219", features = ["derive"] }

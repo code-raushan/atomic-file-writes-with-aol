@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 atomic-writer = { path = "./atomic-writer" }
+append-only-logs = { path = "./append-only-logs" }
 bincode = "2.0.1"
 crc32fast = "1.4.2"
 serde = { version = "1.0.219", features = ["derive"] }
