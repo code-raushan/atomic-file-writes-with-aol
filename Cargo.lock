@@ -16,6 +16,9 @@ dependencies = [
 [[package]]
 name = "atomic-writer"
 version = "0.1.0"
+dependencies = [
+ "uuid",
+]
 
 [[package]]
 name = "bincode"
